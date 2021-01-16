@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: mongo
+    container_name: cscl_db
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootPassword
+      - MONGO_INITDB_DATABASE=cscl
+      - DB_USER=cscl
+      - DB_PASS=mongo # Please note that password must match value in 'seed/1_initialize_user.js'
+    volumes:
+      - mongodb_data:/data/db
+      - ./seed/:/docker-entrypoint-initdb.d/:ro
+volumes:
+  mongodb_data:

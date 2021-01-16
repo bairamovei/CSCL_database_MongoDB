@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mariadb
+    container_name: cscl_db
+    ports: 
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootPassword
+      - MYSQL_DATABASE=cscl
+      - MYSQL_USER=cscl
+      - MYSQL_PASSWORD=mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./seed/:/docker-entrypoint-initdb.d/:ro
+volumes:
+  mysql_data:
